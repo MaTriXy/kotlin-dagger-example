@@ -7,15 +7,11 @@ It's based on Dagger 2 [example](https://github.com/google/dagger/tree/master/ex
 
 ##Known issues/limitations
 
-1. Kotlin compiler does not allow `$` sign in class names. So you can't use Dagger's generated classes that use `$`. There is an issue reported [KT-6444](https://youtrack.jetbrains.com/issue/KT-6444). Dagger 2 is also going to remove `$` from their naming conventions, see [issue](https://github.com/google/dagger/issues/58)
-2. Classes and interfaces that Dagger use for generating implementations must be kept in Java. If it's moved to Kotlin it won't be generated e.g. `AndroidModule`, `ApplicationComponent`
-3. Dagger's field injection is not working within Kotlin files.
+When `lateinit` modifier is used, your variable cannot be used in `init{}` block. It will not compile. So in that case I suggest to move code from that block into a separate function and then call that function from `init{}` block.
 
-This will not work:
-```kotlin
-Inject var locationManager: LocationManager? = null
-```
-Fortunately, setter injection works for Kotlin and syntax is simple:
-```kotlin
-var locationManager: LocationManager? = null
-[Inject] set
+##More than Dagger
+
+This sample project includes some more dependencies which are very usefull. It's like a base setup for almost every project using Kotlin.
+So you will find there Anko libraries. You can uncomment Anko's DSL libraries if you need them.
+There is also a set of Rx dependencies. Rx works really great with Kotlin.
+At last but not least there my favourite networking dependencies from Square.
